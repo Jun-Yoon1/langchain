@@ -19,7 +19,7 @@ def build_retriever(
     k: int = 4,
 ) -> VectorStoreRetriever:
     chunks = split_documents(documents)
-    embeddings = UpstageEmbeddings(model="solar-embedding-1-passage")
+    embeddings = UpstageEmbeddings(model="solar-embedding-1-large")
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,

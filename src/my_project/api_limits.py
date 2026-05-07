@@ -20,6 +20,9 @@ class ApiCallLimiter:
         self.check(api_name)
         return func()
 
+    def reset(self) -> None:
+        self._counts.clear()
+
     def snapshot(self) -> dict[str, int]:
         return dict(self._counts)
 

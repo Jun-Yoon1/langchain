@@ -127,7 +127,7 @@ from pathlib import Path
 
 CHROMA_DIR = str(Path("../data/chroma_db").resolve())
 
-embeddings = UpstageEmbeddings(model="solar-embedding-1-passage")
+embeddings = UpstageEmbeddings(model="solar-embedding-1-large")
 vectorstore = Chroma.from_documents(
     documents=chunks,
     embedding=embeddings,
@@ -139,8 +139,7 @@ print("Chroma 저장 완료")
 #### 셀 5: 검색 테스트
 ```python
 retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
-# 검색 시에는 query 모델 사용
-query_embeddings = UpstageEmbeddings(model="solar-embedding-1-query")
+# UpstageEmbeddings는 문서/질문 임베딩을 메서드로 구분하므로 모델명 suffix를 붙이지 않습니다.
 results = retriever.invoke("RAG 파이프라인 구성 방법")
 for r in results:
     print(r.metadata.get("source", ""), r.page_content[:100])
