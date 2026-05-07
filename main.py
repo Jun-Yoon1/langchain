@@ -18,7 +18,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--query", required=True, help="Question to ask")
     parser.add_argument("--data-path", nargs="*", default=[], help="PDF, TXT, MD file or directory paths for RAG")
     parser.add_argument("--persist-dir", default="chroma_db", help="Chroma persistence directory")
-    parser.add_argument("--model", default="gpt-4o-mini", help="OpenAI chat model name")
+    parser.add_argument("--model", default="solar-pro", help="Upstage chat model name")
     return parser.parse_args()
 
 
@@ -26,8 +26,8 @@ def main() -> None:
     load_dotenv()
     args = parse_args()
 
-    if not os.getenv("OPENAI_API_KEY"):
-        raise RuntimeError("OPENAI_API_KEY is missing. Create .env from .env.example and add your key.")
+    if not os.getenv("UPSTAGE_API_KEY"):
+        raise RuntimeError("UPSTAGE_API_KEY is missing. Create .env from .env.example and add your key.")
 
     if args.data_path:
         documents = load_documents(args.data_path)

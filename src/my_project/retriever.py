@@ -1,8 +1,10 @@
-from langchain_community.vectorstores import Chroma
+from pathlib import Path
+
+from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain_core.vectorstores import VectorStoreRetriever
-from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_upstage import UpstageEmbeddings
 
 
 def split_documents(documents: list[Document]) -> list[Document]:
@@ -12,12 +14,12 @@ def split_documents(documents: list[Document]) -> list[Document]:
 
 def build_retriever(
     documents: list[Document],
-    persist_directory: str = "chroma_db",
+    persist_directory: str = str(Path(__file__).resolve().parents[2] / "data" / "chroma_db"),
     collection_name: str = "project_docs",
     k: int = 4,
 ) -> VectorStoreRetriever:
     chunks = split_documents(documents)
-    embeddings = OpenAIEmbeddings()
+    embeddings = UpstageEmbeddings(model="solar-embedding-1-passage")
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,

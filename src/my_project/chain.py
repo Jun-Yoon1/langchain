@@ -3,10 +3,10 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import Runnable, RunnablePassthrough
 from langchain_core.vectorstores import VectorStoreRetriever
-from langchain_openai import ChatOpenAI
+from langchain_upstage import ChatUpstage
 
 
-def build_chat_chain(model: str = "gpt-4o-mini") -> Runnable:
+def build_chat_chain(model: str = "solar-pro") -> Runnable:
     prompt = ChatPromptTemplate.from_messages(
         [
             (
@@ -16,13 +16,13 @@ def build_chat_chain(model: str = "gpt-4o-mini") -> Runnable:
             ("human", "{question}"),
         ]
     )
-    llm = ChatOpenAI(model=model, temperature=0)
+    llm = ChatUpstage(model=model)
     return prompt | llm | StrOutputParser()
 
 
 def build_rag_chain(
     retriever: VectorStoreRetriever,
-    model: str = "gpt-4o-mini",
+    model: str = "solar-pro",
 ) -> Runnable:
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -35,7 +35,7 @@ def build_rag_chain(
             ("human", "{question}"),
         ]
     )
-    llm = ChatOpenAI(model=model, temperature=0)
+    llm = ChatUpstage(model=model)
 
     return (
         {
