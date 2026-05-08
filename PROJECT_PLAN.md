@@ -132,8 +132,8 @@ src/my_project/
 ├── schemas.py       # PipelineRecommendation Pydantic 모델
 ├── loader.py        # PDF 로드 + 청크 분할
 ├── retriever.py     # Chroma 빌드 + RAG @tool
-├── github_tool.py   # GitHub 검색 @tool
-└── chain.py         # Agent 조립 함수
+├── github_tool.py   # GitHub 검색 @tool (normalize_github_query 포함)
+└── chain.py         # Agent 조립 + GraphRecursionError fallback (synthesize_with_single_pass, replace_github_refs_with_tool_results, extract_real_github_blocks 포함)
 main.py              # argparse CLI
 ```
 
