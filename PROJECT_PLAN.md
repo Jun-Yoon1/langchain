@@ -91,8 +91,9 @@
 ```
 1. GitHub REST API 호출 테스트
    GET https://api.github.com/search/repositories
-   params: q="langchain rag", sort="stars", per_page=3
+   params: q="langchain rag", sort="stars", per_page=10
 2. 응답 파싱 (name, url, stars, description만 추출)
+2-1. 점수 재정렬 (langchain/도메인 키워드 + stars) → 상위 3개 선택
 3. @tool 함수로 래핑
 4. 단독 호출 테스트
 ```
