@@ -81,6 +81,3 @@ def get_lecture_tool(api_limiter=None, api_cache=None):
             return f"Lecture search failed: {exc}"
 
     return search_lecture_materials
-
-
-search_lecture_materials = get_lecture_tool()

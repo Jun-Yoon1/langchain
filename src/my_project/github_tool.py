@@ -202,6 +202,3 @@ def get_github_tool(api_limiter=None, api_cache=None, tool_call_log=None):
             return result
 
     return search_github_repos
-
-
-search_github_repos = get_github_tool()
